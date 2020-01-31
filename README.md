@@ -1,2 +1,2 @@
-# Modelo de Equilibrio General Fedesarrollo
+# Modelo de Equilibrio General
 
