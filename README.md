@@ -15,7 +15,7 @@ I_1t_O              ${I_1t_O}$              (long_name='Inversión de capital en
 
 Los pullrequest que no sigan esa estructura serán devueltos para su corrección.
 
-### Letras grigas
+### Letras griegas
 Para las letras griegas seguimos la convención que aparece en https://es.wikipedia.org/wiki/Alfabeto_griego correspondientes a la columna "adaptado".
 
 ### Subida de cambios
