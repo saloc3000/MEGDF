@@ -10,7 +10,7 @@ variable_subíndices_supraíndices
 
 Ejemplo:
 ``
-G_t             ${G_t}$             (long_name='Gasto corriente real del gobierno')
+I_1t_O              ${I_1t_O}$              (long_name='Inversión de capital en sector 1 de la familia Ricardiana')
 ``
 
 Los pullrequest que no sigan esa estructura serán devueltos para su corrección.
