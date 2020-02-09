@@ -13,7 +13,10 @@ Ejemplo:
 G_t             ${G_t}$             (long_name='Gasto corriente real del gobierno')
 ``
 
-Los pull-request que no sigan esa estructura no serán tenidos en cuenta
+Los pullrequest que no sigan esa estructura no serán tenidos en cuenta.
+
+### Subida de cambios
+Todos los cambios y sugerencias deben hacerse a través de un pull request y podrá ser revisado por todos.
 
 ### Comentarios
 - Seguir la estructura definida en el archivo principal de este repositorio de la rama master.
