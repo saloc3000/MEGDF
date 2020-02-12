@@ -30,12 +30,9 @@ var
     E_Ct                ${E_Ct}$                (long_name='Exportaciones reales del bien de consumo')
     E_t_oil             ${E_t_oil}$             (long_name='Exportaciones petroleras')
     F_t                 ${F_t}$                 (long_name='Necesidades nominales de financiación del gobierno')
-//Empalmar gamma_Lt con la ecuación de la pg. 32
-    gamma_Lt            ${gamma_Lt}$            (long_name='Tasa bruta de crecimiento del crédito a la familia no Ricardiana')
     gamma_pibt          ${gamma_pibt}$          (long_name='Tasa bruta de crecimiento del PIB real')
     G_t                 ${G_t}$                 (long_name='Gasto corriente real del gobierno')
     g_Ct                ${g_Ct}$                (long_name='Gasto corriente del gobierno como % del PIB nominal')
-    g_It                ${g_It}$                (long_name='Gasto en infraestructura como % del PIB nominal')
     h_1t                ${h_1t}$                (long_name='Oferta total de trabajo en sector 1')
     h_2t                ${h_2t}$                (long_name='Oferta total de trabajo en sector 2')
     h_3t                ${h_3t}$                (long_name='Oferta total de trabajo en sector 3')
@@ -156,6 +153,7 @@ var
 	Z_2t                ${Z_2t}$	            (long_name='Monto de Y2,t como insumo en producción del bien doméstico')	
 	Z_Gt                ${Z_Gt}$      	        (long_name='Monto de Y2,t como insumo en el bien de consumo del gobierno')
 	omega_t             ${omega_t}$             (long_name='precio sombra de la unidad adicional')
+	;
 //********************** ******************************
 //definiendo variables exogenas   
 //********************** ******************************
@@ -168,8 +166,23 @@ varexo
    	A_t_1               ${AA_t_1}$              (long_name='Índice de productividad específica a sector 1')
     	A_t_2               ${AA_t_2}$              (long_name='Índice de productividad específica a sector 2')
     	A_t_3               ${AA_t_3}$              (long_name='Índice de productividad específica a sector 3')
+//Empalmar gamma_Lt con la ecuación de la pg. 32
+    	gamma_Lt            ${gamma_Lt}$            (long_name='Tasa bruta de crecimiento del crédito a la familia no Ricardiana')
 	g_t_exo             ${g_t_exo}$             (long_name='Gasto corriente del gobierno como % del PIB, dado exógenamente')
 	g_Ft                ${g_Ft}$                (long_name='% necesidad de financiación del gobierno con bonos domésticos')
+	g_It                ${g_It}$                (long_name='Gasto en infraestructura como % del PIB nominal')
+	Ptoilas 	    $Ptoilas$ 		    (long_name='Precio del petroleo en el mercado internacional')
+	Pctas   	    $Pctas$ 	            (long_name='Precio externo de la canasta externa de bienes de consumo')
+	Phictas 	    $Phictas$ 		    (long_name='Tasa bruta de inflacion externa de la canasta de consumo')
+	Pmtas   	    $Pmtas$ 		    (long_name='Precio externo de las importaciones')
+	Rtas    	    $Rtas$ 		    (long_name='Tasa bruta de interes externa')
+	Rtexo   	    $Rtexo$ 		    (long_name='Tasa bruta de interes nominal dada exogenamente u observada')
+	tCt     	    $tCt$ 		    (long_name='Tasa efectiva de tributacion del consumo')
+	tIt     	    $tIt$ 		    (long_name='Tasa efectiva de tributacion de la inversion')
+	tKt     	    $tKt$ 		    (long_name='Tasa efectiva de tributacion de la renta de capital')
+	tNt     	    $tNt$ 		    (long_name='Tasa efectiva de tributacion del ingreso laboral')
+	tCMt    	    $tCMt$ 		    (long_name='Arancel efectivo sobre bienes de consumo importados')
+	tIMt   		    $tIMt$ 		    (long_name='Arancel efectivo sobre bienes de capital y equipo importados')
     	tau_1t_MX           ${tau_1t_MX}$           (long_name='arancel efectivo de materias primas importadas del sector 1')
 	tau_2t_MX           ${tau_2t_MX}$           (long_name='arancel efectivo de materias primas importadas del sector 2')
 	tau_3t_MX           ${tau_3t_MX}$           (long_name='arancel efectivo de materias primas importadas del sector 3')	
@@ -182,7 +195,8 @@ varexo
 	T_t_O               ${T_t_O}$               (long_name='transferencias recibidar por las familias ricardianas')
 	V_t_O 	            ${V_t_O}$               (long_name='Pago de dividendos de la familia ricardiana*')	
 	v_t	            ${v_t}$                 (long_name='Pago de dividendos como % renta de capital del sector petrolero')	
-	Y*_t	            ${Y*_t}$                (long_name='PIB Externo')
+	Yas_t	            ${Yas_t}$                (long_name='PIB Externo')
+	;
 //********************** *************************
 //definiendo parametros
 //********************** *************************
