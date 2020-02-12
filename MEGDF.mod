@@ -6,38 +6,35 @@
 // Definición de variables endógenas
 //***************************************************************
 var
-    AA_t_1              ${AA_t_1}$              (long_name='Productividad total de los factores sector 1')
-    AA_t_2              ${AA_t_2}$              (long_name='Productividad total de los factores sector 2')
-    AA_t_3              ${AA_t_3}$              (long_name='Productividad total de los factores sector 3')
-    A_t                 ${A_t}$                 (long_name='Índice de productividad agregada multifactorial')
-    A_t_1               ${AA_t_1}$              (long_name='Índice de productividad específica a sector 1')
-    A_t_2               ${AA_t_2}$              (long_name='Índice de productividad específica a sector 2')
-    A_t_3               ${AA_t_3}$              (long_name='Índice de productividad específica a sector 3')
+//Para cambios de endogeno en las variables de productividad ver pg. 58 del documento
     BC_t                ${BC_t}$                (long_name='Balanza comercial')
     B_gt                ${B_gt}$                (long_name='Oferta de bonos domésticos del gobierno')
     B_pt                ${B_pt}$                (long_name='Demanda de bonos del gobierno del sector privado')
+//Revisar B_t_o y CC_t
     B_t_o               ${B_t_o}$               (long_name='Demanda de bonos domésticos de la familia Ricardiana')
-    CC_t                ${CC_t}$                (long_name='Cuenta corriente')
+    CC_t                ${CC_t}$                (long_name='Cuenta corriente*')
+//Para CM_it se deben agregar más adelante dos variables donde se igualen con el precio, ver pg 27.
     CM_1t               ${CM_1t}$               (long_name='Costo marginal de minoristas del sector 1')
     CM_2t               ${CM_2t}$               (long_name='Costo marginal de minoristas del sector 2')
+//C_pt debe empalmarse con la ecuación de la pg. 57
     C_pt                ${C_pt}$                (long_name='Gasto de consumo real del sector privado')
     C_t_NO              ${C_t_NO}$              (long_name='Gasto de consumo real de la familia no-Ricardiana')
     C_t_O               ${C_t_O}$               (long_name='Gasto de consumo real de la familia Ricardiana') 
     D_ct                ${D_ct}$                (long_name='Insumo de bien doméstico en producción del bien de consumo')
     D_it                ${D_it}$                (long_name='Insumo de bien doméstico en producción del bien de inversión')
-    D_gt_*              ${D_gt_*}$              (long_name='Deuda externa del gobierno')
-    D_pt_*              ${D_pt_*}$              (long_name='Deuda externa del sector privado')
-    D_t_*O              ${D_t_*O}$              (long_name='Deuda externa de la familia Ricardiana')
+    D_gt_as              ${D_gt_as}$              (long_name='Deuda externa del gobierno')
+    D_pt_as              ${D_pt_as}$              (long_name='Deuda externa del sector privado')
+//Revisar D_t_asO
+    D_t_asO              ${D_t_asO}$              (long_name='Deuda externa de la familia Ricardiana')
     E_t                 ${E_t}$                 (long_name='Exportaciones reales totales')
     E_Ct                ${E_Ct}$                (long_name='Exportaciones reales del bien de consumo')
     E_t_oil             ${E_t_oil}$             (long_name='Exportaciones petroleras')
     F_t                 ${F_t}$                 (long_name='Necesidades nominales de financiación del gobierno')
+//Empalmar gamma_Lt con la ecuación de la pg. 32
     gamma_Lt            ${gamma_Lt}$            (long_name='Tasa bruta de crecimiento del crédito a la familia no Ricardiana')
     gamma_pibt          ${gamma_pibt}$          (long_name='Tasa bruta de crecimiento del PIB real')
     G_t                 ${G_t}$                 (long_name='Gasto corriente real del gobierno')
     g_Ct                ${g_Ct}$                (long_name='Gasto corriente del gobierno como % del PIB nominal')
-    g_t_exo             ${g_t_exo}$             (long_name='Gasto corriente del gobierno como % del PIB, dado exógenamente')
-    g_Ft                ${g_Ft}$                (long_name='% necesidad de financiación del gobierno con bonos domésticos')
     g_It                ${g_It}$                (long_name='Gasto en infraestructura como % del PIB nominal')
     h_1t                ${h_1t}$                (long_name='Oferta total de trabajo en sector 1')
     h_2t                ${h_2t}$                (long_name='Oferta total de trabajo en sector 2')
@@ -48,6 +45,7 @@ var
     h_1t_O              ${h_1t_O}$              (long_name='Oferta de trabajo de la familia Ricardiana en sector 1')
     h_2t_O              ${h_2t_O}$              (long_name='Oferta de trabajo de la familia Ricardiana en sector 2')
     h_3t_O              ${h_3t_O}$              (long_name='Oferta de trabajo de la familia Ricardiana en sector 3')
+//Para II_gt II_mt revisar pg. 41
     II_gt               ${II_gt}$               (long_name='Función Indicador para cambio de régimen de gasto público')
     II_mt               ${II_mt}$               (long_name='Función Indicador para cambio de régimen de política monetaria')
     I_gt                ${I_gt}$                (long_name='Inversión real de gobierno en infraestructura')
@@ -57,12 +55,67 @@ var
     I_1t_O              ${I_1t_O}$              (long_name='Inversión de capital en sector 1 de la familia Ricardiana')
     I_2t_O              ${I_2t_O}$              (long_name='Inversión de capital en sector 2 de la familia Ricardiana')
     I_3t_O              ${I_3t_O}$              (long_name='Inversión de capital en sector 3 de la familia Ricardiana')
+//Empalmar I_pt con ecuación pg. 59
     I_pt                ${I_pt}$                (long_name='Inversión real privada')
     KK_t                ${KK_t}$                (long_name='Acervo efectivo de infraestructura')
     K_gt                ${K_gt}$                (long_name='Stock de infraestructura pública instalada')
+//Empalmar K_it con ecuación pg. 37 [68]
     K_1t                ${K_1t}$                (long_name='Capital privado instalado en sector 1')
     K_2t                ${K_2t}$                (long_name='Capital privado instalado en sector 2')
     K_3t                ${K_3t}$                (long_name='Capital privado instalado en sector 3')
+    K1Ot    		$K1Ot$ (long_name='Stock de capital de la familia ricardiana en el sector 1')
+    K2Ot    		$K2Ot$ (long_name='Stock de capital de la familia ricardiana en el sector 2')
+    K3Ot    		$K3Ot$ (long_name='Stock de capital de la familia ricardiana en el sector 3')
+//Revisar It
+    It      		$It$ (long_name='Saldo nominal de prestamos a la familia no-ricardiana')
+//Empalmar Lt con ecuación pg. 32 [44]
+    Lrt     		$Lrt$ (long_name='Saldo real de prestamos a la familia no-ricardiana')
+    lt      		$lt$ (long_name='Tasa de apalancamiento de la familia no-ricardiana')
+    Mt      		$Mt$ (long_name='Importaciones reales totales')
+    M1t     		$M1t$ (long_name='Materias primas importadas usadas en el sector 1')
+    M2t     		$M2t$ (long_name='Materias primas importadas usadas en el sector 2')
+    M3t     		$M3t$ (long_name='Materias primas importadas usadas en el sector 3')
+    MCt     		$MCt$ (long_name='Importaciones de bienes de consumo')
+    MIt     		$MIt$ (long_name='Importaciones de bienes de capital y equipo')
+//Empalmar nit con ecuación pg. 42 [88]
+    n1t     		$n1t$ (long_name='Demanda de trabajo de firmas del sector 1')
+    n2t     		$n2t$ (long_name='Demanda de trabajo de firmas del sector 2')
+    n3t     		$n3t$ (long_name='Demanda de trabajo de firmas del sector 3')
+//Empalmar PIBNt con ecuación pg. 42 [84]
+    PIBNt   		$PIBNt$ (long_name='PIB nominal')
+    PIBRt   		$PIBRt$ (long_name='PIB real')
+    P1t     		$P1t$ (long_name='Precio del producto mayorista del sector 1')
+    P2t     		$P2t$ (long_name='Precio del producto mayorista del sector 2')
+    PCt     		$PCt$ (long_name='Indice de precios de la canasta de bienes de consumo')
+    PDt     		$PDt$ (long_name='Precio del bien domestico')
+    PEt     		$PEt$ (long_name='Indice de precios de exportaciones')
+    PGt     		$PEt$ (long_name='Indice de precios de la canasta de consumo del gobierno')
+    PIt     		$PIt$ (long_name='Precio del bien de inversion')
+    PMt     		$PMt$ (long_name='Precio interno de los bienes importados')
+    PPIBt   		$PPIB$ (long_name='Deflactor implicito del PIB')
+    PP1t    		$PP1t$ (long_name='Precio al productor del bien del sector 1')
+    PP2t    		$PP2t$ (long_name='Precio al productor del bien del sector 2')
+    PP3t    		$PP3t$ (long_name='Precio al productor del bien del sector 3')
+ //Empalmar PPjit con ecuación pg 27
+    PPj1t   		$PPj1t$ (long_name='Precio minorista de la variedad j en el sector 1')
+    PPj2t   		$PPj2t$ (long_name='Precio minorista de la variedad j en el sector 2')
+ //Empalmar Prodit con con ecuación pg. 26
+    Prod1t  		$Prod1t$ (long_name='Ganancias agregadas de los minoristas del sector 1')
+    Prod2t  		$Prod2t$ (long_name='Ganancias agregadas de los minoristas del sector 2')
+ //Empalmar Prodjit con ecuación pg. 27 [21]
+    Prodj1t 		$Prodj1t$ (long_name='Ganancias generadas por minorista j del sector 1')
+    Prodj2t 		$Prodj2t$ (long_name='Ganancias generadas por minorista j del sector 2')
+ //Revisar ProdOt (pg. 34)
+    ProdOt  		$ProdOt$ (long_name='Ganancias de familia Ricardiana')
+    PhiCt   		$PhiCt$ (long_name='Tasa bruta de inflacion de la canasta de bienes de consumo')
+    Phi1t   		$Phi1t$ (long_name='Tasa bruta de inflacion de bien mayorista del sector 1')
+    Phi2t   		$Phi2t$ (long_name='Tasa bruta de inflacion de bien mayorista del sector 2')
+    PhiMt   		$PhiMt$ (long_name='Tasa de inflacion domestica de bienes importados')
+//Empalmar rhot con ecuación pg. 40[81]
+    rhot    		$rhot$ (long_name='Prima de riesgo pais')
+    Rt      		$Rt$ (long_name='Tasa de interes nominal domestica')
+    RtW     		$RtW$ (long_name='Tasa bruta de interes externa ajustada por prima de riesgo pais')
+    St      		$St$ (long_name='Tasa de cambio del peso contra el dolar')
     TCR_t               ${TCR_t}$	            (long_name='tasa de cambio real')	
 	TI_t                ${TI_t}$	            (long_name='terminos de intercambio')	
 	u_1t                ${u_1t}$	            (long_name='costo real de alquiler de capital en el sector 1')	
@@ -103,11 +156,21 @@ var
 	Z_2t                ${Z_2t}$	            (long_name='Monto de Y2,t como insumo en producción del bien doméstico')	
 	Z_Gt                ${Z_Gt}$      	        (long_name='Monto de Y2,t como insumo en el bien de consumo del gobierno')
 	omega_t             ${omega_t}$             (long_name='precio sombra de la unidad adicional')
-//***************************** ***********************
+//********************** ******************************
 //definiendo variables exogenas   
-//***************************** ***********************
-varexo   
-    tau_1t_MX           ${tau_1t_MX}$           (long_name='arancel efectivo de materias primas importadas del sector 1')
+//********************** ******************************
+varexo
+//Para cambios de endogeno en las variables de productividad ver pg. 58 del documento
+	AA_t_1              ${AA_t_1}$              (long_name='Productividad total de los factores sector 1')
+    	AA_t_2              ${AA_t_2}$              (long_name='Productividad total de los factores sector 2')
+    	AA_t_3              ${AA_t_3}$              (long_name='Productividad total de los factores sector 3')
+	A_t                 ${A_t}$                 (long_name='Índice de productividad agregada multifactorial')
+   	A_t_1               ${AA_t_1}$              (long_name='Índice de productividad específica a sector 1')
+    	A_t_2               ${AA_t_2}$              (long_name='Índice de productividad específica a sector 2')
+    	A_t_3               ${AA_t_3}$              (long_name='Índice de productividad específica a sector 3')
+	g_t_exo             ${g_t_exo}$             (long_name='Gasto corriente del gobierno como % del PIB, dado exógenamente')
+	g_Ft                ${g_Ft}$                (long_name='% necesidad de financiación del gobierno con bonos domésticos')
+    	tau_1t_MX           ${tau_1t_MX}$           (long_name='arancel efectivo de materias primas importadas del sector 1')
 	tau_2t_MX           ${tau_2t_MX}$           (long_name='arancel efectivo de materias primas importadas del sector 2')
 	tau_3t_MX           ${tau_3t_MX}$           (long_name='arancel efectivo de materias primas importadas del sector 3')	
 	tau_1t_X            ${tau_1t_X}$            (long_name='tasa de tributacion del consumo intermedio del sector 1')	
@@ -118,7 +181,7 @@ varexo
 	T_t_NO              ${T_t_NO}$              (long_name='transferencias recibidar por las familias no ricardianas')
 	T_t_O               ${T_t_O}$               (long_name='transferencias recibidar por las familias ricardianas')
 	V_t_O 	            ${V_t_O}$               (long_name='Pago de dividendos de la familia ricardiana*')	
-	v_t	                ${v_t}$                 (long_name='Pago de dividendos como % renta de capital del sector petrolero')	
+	v_t	            ${v_t}$                 (long_name='Pago de dividendos como % renta de capital del sector petrolero')	
 	Y*_t	            ${Y*_t}$                (long_name='PIB Externo')
 //********************** *************************
 //definiendo parametros
