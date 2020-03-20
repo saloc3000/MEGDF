@@ -159,61 +159,142 @@ var
 //********************** ******************************
 varexo
 //Para cambios de endogeno en las variables de productividad ver pg. 58 del documento
-	AA_t_1              ${AA_t_1}$		(long_name='Productividad total de los factores sector 1')
-    	AA_t_2              ${AA_t_2}$		(long_name='Productividad total de los factores sector 2')
-    	AA_t_3              ${AA_t_3}$		(long_name='Productividad total de los factores sector 3')
-	A_t                 ${A_t}$		(long_name='Índice de productividad agregada multifactorial')
-   	A_t_1               ${AA_t_1}$		(long_name='Índice de productividad específica a sector 1')
-    	A_t_2               ${AA_t_2}$		(long_name='Índice de productividad específica a sector 2')
-    	A_t_3               ${AA_t_3}$		(long_name='Índice de productividad específica a sector 3')
+	AA_t_1           ${AA_t_1}$		(long_name='Productividad total de los factores sector 1')
+    	AA_t_2           ${AA_t_2}$		(long_name='Productividad total de los factores sector 2')
+    	AA_t_3           ${AA_t_3}$		(long_name='Productividad total de los factores sector 3')
+	A_t              ${A_t}$		(long_name='Índice de productividad agregada multifactorial')
+   	A_t_1            ${AA_t_1}$		(long_name='Índice de productividad específica a sector 1')
+    	A_t_2            ${AA_t_2}$		(long_name='Índice de productividad específica a sector 2')
+    	A_t_3            ${AA_t_3}$		(long_name='Índice de productividad específica a sector 3')
 //Empalmar gamma_Lt con la ecuación de la pg. 32... as: asterisco, para diferenciar las variables internacionales de las domésticas
-    	gamma_Lt            ${gamma_Lt}$	(long_name='Tasa bruta de crecimiento del crédito a la familia no Ricardiana')
-	g_t_exo             ${g_t_exo}$		(long_name='Gasto corriente del gobierno como % del PIB, dado exógenamente')
-	g_Ft                ${g_Ft}$		(long_name='% necesidad de financiación del gobierno con bonos domésticos')
-	g_It                ${g_It}$		(long_name='Gasto en infraestructura como % del PIB nominal')
-	P_t_oilas 	    ${P_t_oilas}$ 	(long_name='Precio del petroleo en el mercado internacional')
-	P_t_cas   	    ${Pt_cas}$		(long_name='Precio externo de la canasta externa de bienes de consumo')
-	fi_t_cas 	    ${fi_t_cas}$	(long_name='Tasa bruta de inflacion externa de la canasta de consumo')
-	P_t_mas   	    ${P_t_mas}$		(long_name='Precio externo de las importaciones')
-	R_t_as    	    ${R_t_as}$		(long_name='Tasa bruta de interes externa')
-	R_t_exo   	    ${R_t_exo}$		(long_name='Tasa bruta de interes nominal dada exogenamente u observada')
-	tau_Ct     	    ${tau_Ct}$		(long_name='Tasa efectiva de tributacion del consumo')
-	tau_It     	    ${tau_It}$		(long_name='Tasa efectiva de tributacion de la inversion')
-	tau_Kt     	    ${tau_Kt}$		(long_name='Tasa efectiva de tributacion de la renta de capital')
-	tau_Nt     	    ${tau_Nt}$		(long_name='Tasa efectiva de tributacion del ingreso laboral')
-	tau_CMt    	    ${tau_CMt}$		(long_name='Arancel efectivo sobre bienes de consumo importados')
-	tau_IMt   	    ${tau_IMt}$ 	(long_name='Arancel efectivo sobre bienes de capital y equipo importados')
-    	tau_1t_MX           ${tau_1t_MX}$	(long_name='arancel efectivo de materias primas importadas del sector 1')
-	tau_2t_MX           ${tau_2t_MX}$	(long_name='arancel efectivo de materias primas importadas del sector 2')
-	tau_3t_MX           ${tau_3t_MX}$	(long_name='arancel efectivo de materias primas importadas del sector 3')	
-	tau_1t_X            ${tau_1t_X}$	(long_name='tasa de tributacion del consumo intermedio del sector 1')	
-	tau_2t_X            ${tau_2t_X}$	(long_name='tasa de tributacion del consumo intermedio del sector 2')	
-	tau_3t_X            ${tau_3t_X}$	(long_name='tasa de tributacion del consumo intermedio del sector 3')
-	T_Gt                ${T_Gt}$		(long_name='transferencias del gobierno*')	
-	T_Pt                ${T_Pt}$		(long_name='transferencias  recibidas por el sector privado*')	
-	T_t_NO              ${T_t_NO}$		(long_name='transferencias recibidar por las familias no ricardianas')
-	T_t_O               ${T_t_O}$		(long_name='transferencias recibidar por las familias ricardianas')
-	V_t_O 	            ${V_t_O}$		(long_name='Pago de dividendos de la familia ricardiana*')	
-	v_t	            ${v_t}$		(long_name='Pago de dividendos como % renta de capital del sector petrolero')	
-	Yas_t	            ${Yas_t}$		(long_name='PIB Externo')
+    	gamma_Lt         ${gamma_Lt}$		(long_name='Tasa bruta de crecimiento del crédito a la familia no Ricardiana')
+	g_t_exo          ${g_t_exo}$		(long_name='Gasto corriente del gobierno como % del PIB, dado exógenamente')
+	g_Ft             ${g_Ft}$		(long_name='% necesidad de financiación del gobierno con bonos domésticos')
+	g_It             ${g_It}$		(long_name='Gasto en infraestructura como % del PIB nominal')
+	P_t_oilas 	 ${P_t_oilas}$	 	(long_name='Precio del petroleo en el mercado internacional')
+	P_t_cas   	 ${Pt_cas}$		(long_name='Precio externo de la canasta externa de bienes de consumo')
+	fi_t_cas 	 ${fi_t_cas}$		(long_name='Tasa bruta de inflacion externa de la canasta de consumo')
+	P_t_mas   	 ${P_t_mas}$		(long_name='Precio externo de las importaciones')
+	R_t_as    	 ${R_t_as}$		(long_name='Tasa bruta de interes externa')
+	R_t_exo   	 ${R_t_exo}$		(long_name='Tasa bruta de interes nominal dada exogenamente u observada')
+	tau_Ct     	 ${tau_Ct}$		(long_name='Tasa efectiva de tributacion del consumo')
+	tau_It     	 ${tau_It}$		(long_name='Tasa efectiva de tributacion de la inversion')
+	tau_Kt     	 ${tau_Kt}$		(long_name='Tasa efectiva de tributacion de la renta de capital')
+	tau_Nt     	 ${tau_Nt}$		(long_name='Tasa efectiva de tributacion del ingreso laboral')
+	tau_CMt    	 ${tau_CMt}$		(long_name='Arancel efectivo sobre bienes de consumo importados')
+	tau_IMt   	 ${tau_IMt}$ 		(long_name='Arancel efectivo sobre bienes de capital y equipo importados')
+    	tau_1t_MX        ${tau_1t_MX}$		(long_name='arancel efectivo de materias primas importadas del sector 1')
+	tau_2t_MX        ${tau_2t_MX}$		(long_name='arancel efectivo de materias primas importadas del sector 2')
+	tau_3t_MX        ${tau_3t_MX}$		(long_name='arancel efectivo de materias primas importadas del sector 3')	
+	tau_1t_X         ${tau_1t_X}$		(long_name='tasa de tributacion del consumo intermedio del sector 1')	
+	tau_2t_X         ${tau_2t_X}$		(long_name='tasa de tributacion del consumo intermedio del sector 2')	
+	tau_3t_X         ${tau_3t_X}$		(long_name='tasa de tributacion del consumo intermedio del sector 3')
+	T_Gt             ${T_Gt}$		(long_name='transferencias del gobierno*')	
+	T_Pt             ${T_Pt}$		(long_name='transferencias  recibidas por el sector privado*')	
+	T_t_NO           ${T_t_NO}$		(long_name='transferencias recibidar por las familias no ricardianas')
+	T_t_O            ${T_t_O}$		(long_name='transferencias recibidar por las familias ricardianas')
+	V_t_O 	         ${V_t_O}$		(long_name='Pago de dividendos de la familia ricardiana*')	
+	v_t	         ${v_t}$		(long_name='Pago de dividendos como % renta de capital del sector petrolero')	
+	Yas_t	         ${Yas_t}$		(long_name='PIB Externo')
 	;
 //********************** *************************
 //definiendo parametros
 //********************** *************************
 parameters    
-    alfa_1	            ${alfa_1}$		(long_name='Elasticidad del valor agregado del sector 1 con respecto al capital')		
-	alfa_2	            ${alfa_2}$		(long_name='Elasticidad del valor agregado del sector 2 con respecto al capital')		
-	alfa_3              ${alfa_3}$		(long_name='Elasticidad del valor agregado del sector 3 con respecto al capital')	
-	A_1	            ${A_1}$		(long_name='Parámetro de escala de la función de producción del sector 1')	
-	A_2                 ${A_2}$		(long_name='Parámetro de escala de la función de producción del sector 2')			
-	A_3                 ${A_3}$		(long_name='Parámetro de escala de la función de producción del sector 3')	
-	A_C                 ${A_C}$		(long_name='Parámetro de escala de la función de producción del bien de consumo')
-	A_D                 ${A_D}$		(long_name='Parámetro de escala de la función de producción del bien domestico')        
-	A_E                 ${A_E}$		(long_name='Parámetro de escala de la función agregacion de exportaciones')	
-	A_G                 ${A_G}$		(long_name='Parámetro de escala de la función de producción del bien de consumo del gobierno')	
-	A_I                 ${A_I}$		(long_name='Parámetro de escala de la función de producción del bien de inversion')	
-	A_P                 ${A_P}$		(long_name='Parámetro de escala de la función de prima de riesgo')
-	A_X                 ${A_X}$		(long_name='Parámetro de escala de la función de demanda de exportaciones')
-	beta	            ${beta}$		(long_name='factor subjetivo de descuento')
-	gamma 	            ${gamma}$		(long_name='Tasa bruta de crecimiento del PIB por persona en edad de trabajar -15,64- años-')
-    
+    	alfa_1		 ${alfa_1}$		(long_name='Elasticidad del valor agregado del sector 1 con respecto al capital')		
+ 	alfa_2	         ${alfa_2}$		(long_name='Elasticidad del valor agregado del sector 2 con respecto al capital')		
+	alfa_3           ${alfa_3}$		(long_name='Elasticidad del valor agregado del sector 3 con respecto al capital')	
+	A_1	         ${A_1}$		(long_name='Parámetro de escala de la función de producción del sector 1')	
+	A_2              ${A_2}$		(long_name='Parámetro de escala de la función de producción del sector 2')			
+	A_3              ${A_3}$		(long_name='Parámetro de escala de la función de producción del sector 3')	
+	A_C              ${A_C}$		(long_name='Parámetro de escala de la función de producción del bien de consumo')
+	A_D              ${A_D}$		(long_name='Parámetro de escala de la función de producción del bien domestico')        
+	A_E              ${A_E}$		(long_name='Parámetro de escala de la función agregacion de exportaciones')	
+	A_G              ${A_G}$		(long_name='Parámetro de escala de la función de producción del bien de consumo del gobierno')	
+	A_I              ${A_I}$		(long_name='Parámetro de escala de la función de producción del bien de inversion')	
+	A_ro             ${A_ro}$		(long_name='Parámetro de escala de la función de prima de riesgo')
+	A_X              ${A_X}$		(long_name='Parámetro de escala de la función de demanda de exportaciones')
+	beta	         ${beta}$		(long_name='factor subjetivo de descuento')
+	ghama 	         ${ghama}$		(long_name='Tasa bruta de crecimiento del PIB por persona en edad de trabajar -15,64- años-')
+	dhelta_1	 ${dhelta_1}$		(long_name='Tasa de depreciación del capital en sector 1')
+	dhelta_2	 ${dhelta_2}$		(long_name='Tasa de depreciación del capital en sector 2')
+	dhelta_3	 ${dhelta_3}$		(long_name='Tasa de depreciación del capital en sector 3')
+	dhelta_g	 ${dhelta_g}$		(long_name='Tasa de depreciación de la infraestructura')
+	dep		 ${dep}$		(long_name='Relación deuda externa total al PIB')
+	dpp		 ${dpp}$		(long_name='Relación deuda pública externa e interna a PIB')
+	epsilon		 ${epsilon}$		(long_name='Inverso de la elasticidad de la oferta de trabajo')
+	ita_1		 ${ita_1}$		(long_name='Parámetro que define el tamaño de costos de ajuste de la inversión en sector 1')
+	ita_2		 ${ita_2}$		(long_name='Parámetro que define el tamaño de costos de ajuste de la inversión en sector 2')
+	ita_3		 ${ita_3}$		(long_name='Parámetro que define el tamaño de costos de ajuste de la inversión en sector 3')
+	ita_g		 ${ita_g}$		(long_name='Parámetro que define costos de ajuste de la inversión en infraestructura')
+	thita		 ${thita}$		(long_name='Elasticidad del valor agregado con respecto al capital público efectivo')
+	iota		 ${iota}$		(long_name='Parámetro de política de la Regla de Taylor')
+	lamda		 ${lamda}$		(long_name='Porcentaje de la población no-Ricardiana')
+	mi_C		 ${mi_C}$		(long_name='Ponderación del insumo doméstico en la producción del bien de consumo')
+	mi_D		 ${mi_D}$		(long_name='Ponderación del insumo transable en la producción del bien doméstico')
+	mi_E		 ${mi_E}$		(long_name='Peso de exportaciones del bien de consumo en agregado de exportaciones')
+	mi_I		 ${mi_I}$		(long_name='Ponderación del insumo doméstico en la producción del bien de inversión')
+	xi_1		 ${xi_1}$		(long_name='Coste de ajuste de precios en el sector 1')
+	xi_2		 ${xi_2}$		(long_name='Coste de ajuste de precios en el sector 2')
+	xi_M		 ${xi_M}$		(long_name='Coste de ajuste de precios en el sector importador')
+	//Creo que fi_C y fi_C_as corresponden con lo que serían las 'inflaciones objetivo' y habría que diferenciarlas de las variables
+	fi_C		 ${fi_C}$		(long_name='Tasa bruta de inflación de largo plazo de la canasta de bienes de consumo')
+	fi_C_as		 ${fi_C_as}$		(long_name='Tasa bruta de inflación externa')
+	ro		 ${ro}$			(long_name='Elasticidad del spread con respecto a la deuda externa total')
+	zita		 ${zita}$		(long_name='Parámetro de suavización en la regla monetaria')
+	sigma_1		 ${sigma_1}$		(long_name='Parámetro de ajuste de gasto en la regla fiscal')
+	sigma_2		 ${sigma_2}$		(long_name='Valor absoluto de la elasticidad precio de la demanda de exportaciones')
+//********************** *************************
+//Estableciendo el valor de los parámetros
+//********************** *************************    
+	alfa_1 = 0.3987;
+	alfa_2 = 0.3234;
+	alfa_3 = 0.9223;
+	A_1 = 1.8803;
+	A_2 = 1.2899;
+	A_3 = 0.4832;
+	A_C = 1.0190;
+	A_D = 1.2000;
+	A_E = 1.8563;
+	A_G = 1.2000;
+	A_I = 1.0103;
+	A_ro = 1.0744;
+	A_X = 11.5372;
+	beta = 0.9603;
+	ghama = 1.0200;
+	dhelta_1 = 0.0716;
+	dhelta_2 = 0.0464;
+	dhelta_3 = 0.2473;
+	dhelta_g = 0.0351;
+	dep = 0.1968;
+	dpp = 0.3492;
+	epsilon = 1.4550;
+	ita_1 = 4.0000;
+	ita_2 = 4.0000;
+	ita_3 = 4.0000;
+	ita_g = 4.0000;
+	thita = 0.0700;
+	iota = 1.6750;
+	lamda = 0.6500;
+	mi_C = 0.9456;
+	mi_D = 0.3345;
+	mi_E = 0.6906;
+	mi_I = 0.8012;
+	xi_1 = 1.0000;
+	xi_2 = 1.0000;
+	xi_M = 1.0000;
+	fi_C = 1.0300;
+	fi_C_as = 1.0167;
+	ro = 0.4510;
+	zita = 0.4340;
+	sigma_1 = 0.0200;
+	sigma_2 = 0.4710;
+	
+
+
+
+
+
+
+
+
