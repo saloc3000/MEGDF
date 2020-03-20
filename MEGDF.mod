@@ -30,7 +30,7 @@ var
     E_Ct                ${E_Ct}$                (long_name='Exportaciones reales del bien de consumo')
     E_t_oil             ${E_t_oil}$             (long_name='Exportaciones petroleras')
     F_t                 ${F_t}$                 (long_name='Necesidades nominales de financiación del gobierno')
-    gamma_pibt          ${gamma_pibt}$          (long_name='Tasa bruta de crecimiento del PIB real')
+    ghama_pibt          ${ghama_pibt}$          (long_name='Tasa bruta de crecimiento del PIB real')
     G_t                 ${G_t}$                 (long_name='Gasto corriente real del gobierno')
     g_Ct                ${g_Ct}$                (long_name='Gasto corriente del gobierno como % del PIB nominal')
     h_1t                ${h_1t}$                (long_name='Oferta total de trabajo en sector 1')
@@ -141,7 +141,8 @@ var
 	Y_Ct            ${Y_Ct}$		(long_name='produccion del bien de consumo')	
     	Y_Dt            ${Y_Dt}$		(long_name='produccion del bien domestico')
 	Y_Gt            ${Y_Gt}$		(long_name='produduccion del bien de consumo del gobierno')
-	Y_It            ${Y_It}$		(long_name='produccion del bien de inversión')	
+	Y_It            ${Y_It}$		(long_name='produccion del bien de inversión')
+	//Para todas las ecuaciones de Y_it revisar la ecuación [15] del documento, pg. 26 y sus valores de est. estacionario 
 	Y_1t            ${Y_1t}$		(long_name='produccion mayorista del sector 1')
 	Y_2t            ${Y_2t}$		(long_name='produccion mayorista del sector 2')  
 	YY_1t           ${YY_1t}$		(long_name='produccion bruta del sector 1') 
@@ -244,6 +245,32 @@ parameters
 	zita		 ${zita}$		(long_name='Parámetro de suavización en la regla monetaria')
 	sigma_1		 ${sigma_1}$		(long_name='Parámetro de ajuste de gasto en la regla fiscal')
 	sigma_2		 ${sigma_2}$		(long_name='Valor absoluto de la elasticidad precio de la demanda de exportaciones')
+	fi_1		 ${fi_1}$		(long_name='Parámetro que gobierna el tamaño del "mark up"')
+	fi_2		 ${fi_2}$		(long_name='Grado de congestión o rivalidad entre capital público y privado')
+	R		 ${R}$			(long_name='Tasa bruta de interés nominal de largo plazo')
+	ji_1_1		 ${ji_1_1}$		(long_name='Requerimiento de insumo del sector 1 en la producción bruta del sector 1')
+	ji_1_2		 ${ji_1_2}$		(long_name='Requerimiento de insumo del sector 1 en la producción bruta del sector 2')
+	ji_1_3		 ${ji_1_3}$		(long_name='Requerimiento de insumo del sector 1 en la producción bruta del sector 3')
+	ji_2_1		 ${ji_2_1}$		(long_name='Requerimiento de insumo del sector 2 en la producción bruta del sector 1')
+	ji_2_2		 ${ji_2_2}$		(long_name='Requerimiento de insumo del sector 2 en la producción bruta del sector 2')
+	ji_2_3		 ${ji_2_3}$		(long_name='Requerimiento de insumo del sector 2 en la producción bruta del sector 3')
+	ji_3_1		 ${ji_3_1}$		(long_name='Requerimiento de insumo del sector 3 en la producción bruta del sector 1')
+	ji_3_2		 ${ji_3_2}$		(long_name='Requerimiento de insumo del sector 3 en la producción bruta del sector 2')
+	ji_3_3		 ${ji_3_3}$		(long_name='Requerimiento de insumo del sector 3 en la producción bruta del sector 3')
+	ji_M_1		 ${ji_M_1}$		(long_name='Requerimiento de materias primas importadas en la producción del sector 1')
+	ji_M_2		 ${ji_M_2}$		(long_name='Requerimiento de materias primas importadas en la producción del sector 2')
+	ji_M_3		 ${ji_M_3}$		(long_name='Requerimiento de materias primas importadas en la producción del sector 3')
+	psi_1_NO	 ${psi_1_NO}$		(long_name='Parámetro de desutilidad del trabajo no-Ricardiano en sector 1')
+	psi_2_NO	 ${psi_2_NO}$		(long_name='Parámetro de desutilidad del trabajo no-Ricardiano en sector 2')
+	psi_3_NO	 ${psi_3_NO}$		(long_name='Parámetro de desutilidad del trabajo no-Ricardiano en sector 3')
+	psi_1_O		 ${psi_1_O}$		(long_name='Parámetro de desutilidad del trabajo Ricardiano en sector 1')
+	psi_2_O		 ${psi_2_O}$		(long_name='Parámetro de desutilidad del trabajo Ricardiano en sector 2')
+	psi_3_O		 ${psi_3_O}$		(long_name='Parámetro de desutilidad del trabajo Ricardiano en sector 3')
+	omega_C		 ${omega_C}$		(long_name='Elasticidad de sustitución de Armington entre bienes domésticos e importados')
+	omega_D		 ${omega_D}$		(long_name='Elasticidad de sustitución entre bienes transables y no transables')
+	//En omega_I tuve que poner algo adicional en el long_name porque repiten la frase igualito que con el omega_C
+	omega_I		 ${omega_I}$		(long_name='Elasticidad de sustitución de Armington entre bienes domésticos e importados (en I)')
+	;
 //********************** *************************
 //Estableciendo el valor de los parámetros
 //********************** *************************    
@@ -289,10 +316,51 @@ parameters
 	zita = 0.4340;
 	sigma_1 = 0.0200;
 	sigma_2 = 0.4710;
+	fi_1 = 6.0000;
+	fi_2 = 0.1200;
+	R = 1.0940;
+	ji_1_1 = 0.2511;
+	ji_1_2 = 0.0802;
+	// No se necesita ningún insumo del sector transable para la producción bruta del sector petrolero (valor de 0)
+	ji_1_3 = 0.0000;
+	ji_2_1 = 0.1883;
+	ji_2_2 = 0.2526;
+	ji_2_3 = 0.0687;
+	ji_3_1 = 0.0250;
+	// No se necesita ningún insumo del sector petrolero para la producción bruta del sector no transable (valor de 0)
+	ji_3_2 = 0.0000;
+	ji_3_3 = 0.0822;
+	ji_M_1 = 0.1188;
+	ji_M_2 = 0.0498;
+	//No se necesitan materias primas importadas para la producción del sector petrolero (valor de 0)
+	ji_M_3 = 0.0000;
+	psi_1_NO = 0.0271;
+	psi_2_NO = 0.0042;
+	psi_3_NO = 3.1562;
+	psi_1_O = 0.0232;
+	psi_2_O = 0.0036;
+	psi_3_O = 2.7064;
+	omega_C = 1.5000;
+	omega_D = 0.7500;
+	omega_I = 1.5000;
+
+//********************** *************************
+//Ecuaciones del modelo
+//********************** *************************  
+model;
+// [13]
+	X_21t = ji_2_1 * YY_1t;
+// [14]
+	X_22t = ji_2_2 * YY_2t;
+// [15]
+	X_23t = ji_2_3 * YY_3t;
+// [23]
+	P_1t = (((fi_1 - 1) / fi_1) + (xi_1 / fi_1) * ((fi_1t / fi_C) - 1) * (fi_1t / fi_C) - beta * (xi_1 / fi_1) * (omega_t(+1) / omega_t) * ((fi_1t(+1) / fi_C) - 1) * (fi_1t(+1) / fi_C) * (fi_1t(+1) / fi_C(+1)) * (Y_1t(+1) / Y_1t)) ^ (-1) * P_1t_P;               
+// [24]
+	P_2t = (((fi_1 - 1) / fi_1) + (xi_2 / fi_1) * ((fi_2t / fi_C) - 1) * (fi_2t / fi_C) - beta * (xi_2 / fi_1) * (omega_t(+1) / omega_t) * ((fi_2t(+1) / fi_C) - 1) * (fi_2t(+1) / fi_C) * (fi_2t(+1) / fi_C(+1)) * (Y_2t(+1) / Y_2t)) ^ (-1) * P_2t_P; 
+// [25]
+	P_Mt = (((fi_1 - 1) / fi_1) + (xi_M / fi_1) * ((fi_Mt / fi_C) - 1) * (fi_Mt / fi_C) - beta * (xi_M / fi_1) * (omega_t(+1) / omega_t) * ((fi_Mt(+1) / fi_C) - 1) * (fi_Mt(+1) / fi_C) * (fi_Mt(+1) / fi_C(+1)) * (M_t(+1) / M_t)) ^ (-1) * TCR_t * P_t_mas;
 	
-
-
-
 
 
 
