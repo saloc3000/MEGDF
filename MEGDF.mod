@@ -365,8 +365,8 @@ model;
 	P_2t = (((fi_1 - 1) / fi_1) + (xi_2 / fi_1) * ((fi_2t / fi_C) - 1) * (fi_2t / fi_C) - beta * (xi_2 / fi_1) * (omega_t(+1) / omega_t) * ((fi_2t(+1) / fi_C) - 1) * (fi_2t(+1) / fi_C) * (fi_2t(+1) / fi_C(+1)) * ((Y_2t(+1) / ghama_pibt(+1)) / (Y_2t / ghama_pibt))) ^ (-1) * P_2t_P; 
 // [25] Aquí se utiliza el TCR (Anexo B) en lugar del tipo de cambio nominal (St) del Anexo A, por lo que más adelante tocará definir la ecuación para el tipo de cambio real
 	P_Mt = (((fi_1 - 1) / fi_1) + (xi_M / fi_1) * ((fi_Mt / fi_C) - 1) * (fi_Mt / fi_C) - beta * (xi_M / fi_1) * (omega_t(+1) / omega_t) * ((fi_Mt(+1) / fi_C) - 1) * (fi_Mt(+1) / fi_C) * (fi_Mt(+1) / fi_C(+1)) * (M_t(+1) / M_t)) ^ (-1) * TCR_t * P_t_mas;
-// [89] Esta es una ecuación del Anexo A que se debe definir en este apartado, revisar además la ecuación [14] del documento pg. 25, la ecuación de R de la pg. 36 y la ec. [71] del documento	
-	TCR_t = (S_t * P_t_cas) / (P_Ct);
+// [89] Esta es una ecuación del Anexo A que se debe definir en este apartado, ya está estacionarizado, revisar además la ecuación [14] del documento pg. 25, la ecuación de R de la pg. 36 y la ec. [71] del documento	
+	TCR_t = S_t;
 // [30] (Anexo A)
 	fi_Ct = P_Ct / P_Ct(-1);
 // [26] 
