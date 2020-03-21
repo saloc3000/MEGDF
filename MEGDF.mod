@@ -64,7 +64,7 @@ var
     K_2t_O    		${K_2t_O}$ 		(long_name='Stock de capital de la familia ricardiana en el sector 2')
     K_3t_O    		${K_3t_O}$ 		(long_name='Stock de capital de la familia ricardiana en el sector 3')
 //Revisar It
-    I_t      		${I_t}$ (long_name='Saldo nominal de prestamos a la familia no-ricardiana')
+    I_t      		${I_t}$ 		(long_name='Saldo nominal de prestamos a la familia no-ricardiana')
 //Empalmar Lt con ecuación pg. 32 [44]
     Lr_t     		${Lr_t}$ 		(long_name='Saldo real de prestamos a la familia no-ricardiana')
     l_t      		${l_t}$ 		(long_name='Tasa de apalancamiento de la familia no-ricardiana')
@@ -112,6 +112,7 @@ var
     ro_t    		${ro_t}$ 		(long_name='Prima de riesgo pais')
     R_t      		${R_t}$ 		(long_name='Tasa de interes nominal domestica')
     R_t_W     		${R_t_W}$ 		(long_name='Tasa bruta de interes externa ajustada por prima de riesgo pais')
+//Revisar S_t
     S_t      		${S_t}$ 		(long_name='Tasa de cambio del peso contra el dolar')
     TCR_t               ${TCR_t}$	        (long_name='tasa de cambio real')	
 	TI_t            ${TI_t}$	        (long_name='terminos de intercambio')	
@@ -132,10 +133,8 @@ var
 	X_31t           ${X_31t}$	        (long_name='Insumo del sector 3 usado en la producción del sector 1')  	
 	X_32t           ${X_32t}$	        (long_name='Insumo del sector 3 usado en la producción del sector 2')  	
 	X_33t           ${X_33t}$		(long_name='Insumo del sector 3 usado en la producción del sector 3')
-	XX_11t          ${XX_1t}$		(long_name='compras minoristas de 1 del bien YY1*') 
-	XX_12t          ${XX_12t}$		(long_name='compras minoristas de 2 del bien YY2*') 
-	XX_21t          ${XX_21t}$		(long_name='compras minoristas de 2 del  bien YY1*')
-	XX_22t          ${XX_22t}$		(long_name='compras minoristas  de 2 del bien YY2*')
+	XX_1t          ${XX_1t}$		(long_name='compras minoristas del bien YY1_t') 
+	XX_2t          ${XX_2t}$		(long_name='compras minoristas del bien YY2_t') 
 	XX_j1t          ${XX_j1t}$		(long_name='compras del minorista j del bien YY1*')
 	XX_j2t          ${XX_j2t}$		(long_name='compras del minorista j del bien YY2*')
 	Y_Ct            ${Y_Ct}$		(long_name='produccion del bien de consumo')	
@@ -348,21 +347,79 @@ parameters
 //Ecuaciones del modelo
 //********************** *************************  
 model;
-// [13]
+//********************** 
+//Firmas sectoriales
+//**********************  
+// [13] En este tipo de ecuaciones se cancelan los crecimientos y da lo mismo que poner las variables agregadas
 	X_21t = ji_2_1 * YY_1t;
 // [14]
 	X_22t = ji_2_2 * YY_2t;
 // [15]
 	X_23t = ji_2_3 * YY_3t;
-// [23]
-	P_1t = (((fi_1 - 1) / fi_1) + (xi_1 / fi_1) * ((fi_1t / fi_C) - 1) * (fi_1t / fi_C) - beta * (xi_1 / fi_1) * (omega_t(+1) / omega_t) * ((fi_1t(+1) / fi_C) - 1) * (fi_1t(+1) / fi_C) * (fi_1t(+1) / fi_C(+1)) * (Y_1t(+1) / Y_1t)) ^ (-1) * P_1t_P;               
+//*************************************
+//Mayoristas, minoristas e importadores
+//*************************************
+// [23] En esta ecuación y en la [24] no cambia nada, porque, nuevamente, se está dividiendo a ambos lados. Para la parte del Y_1t(+1) / Y_1t se divide arriba y abajo sobre el ghama del pib aunque ghama_pibt=ghama_pibt+1=ghama=1.02 en el largo plazo.
+	P_1t = (((fi_1 - 1) / fi_1) + (xi_1 / fi_1) * ((fi_1t / fi_C) - 1) * (fi_1t / fi_C) - beta * (xi_1 / fi_1) * (omega_t(+1) / omega_t) * ((fi_1t(+1) / fi_C) - 1) * (fi_1t(+1) / fi_C) * (fi_1t(+1) / fi_C(+1)) * ((Y_1t(+1) / ghama_pibt(+1)) / (Y_1t / ghama_pibt))) ^ (-1) * P_1t_P;               
 // [24]
-	P_2t = (((fi_1 - 1) / fi_1) + (xi_2 / fi_1) * ((fi_2t / fi_C) - 1) * (fi_2t / fi_C) - beta * (xi_2 / fi_1) * (omega_t(+1) / omega_t) * ((fi_2t(+1) / fi_C) - 1) * (fi_2t(+1) / fi_C) * (fi_2t(+1) / fi_C(+1)) * (Y_2t(+1) / Y_2t)) ^ (-1) * P_2t_P; 
-// [25]
+	P_2t = (((fi_1 - 1) / fi_1) + (xi_2 / fi_1) * ((fi_2t / fi_C) - 1) * (fi_2t / fi_C) - beta * (xi_2 / fi_1) * (omega_t(+1) / omega_t) * ((fi_2t(+1) / fi_C) - 1) * (fi_2t(+1) / fi_C) * (fi_2t(+1) / fi_C(+1)) * ((Y_2t(+1) / ghama_pibt(+1)) / (Y_2t / ghama_pibt))) ^ (-1) * P_2t_P; 
+// [25] Aquí se utiliza el TCR (Anexo B) en lugar del tipo de cambio nominal (St) del Anexo A, por lo que más adelante tocará definir la ecuación para el tipo de cambio real
 	P_Mt = (((fi_1 - 1) / fi_1) + (xi_M / fi_1) * ((fi_Mt / fi_C) - 1) * (fi_Mt / fi_C) - beta * (xi_M / fi_1) * (omega_t(+1) / omega_t) * ((fi_Mt(+1) / fi_C) - 1) * (fi_Mt(+1) / fi_C) * (fi_Mt(+1) / fi_C(+1)) * (M_t(+1) / M_t)) ^ (-1) * TCR_t * P_t_mas;
+// [89] Esta es una ecuación del Anexo A que se debe definir en este apartado, revisar además la ecuación [14] del documento pg. 25, la ecuación de R de la pg. 36 y la ec. [71] del documento	
+	TCR_t = (S_t * P_t_cas) / (P_Ct);
+// [30] (Anexo A)
+	fi_Ct = P_Ct / P_Ct(-1);
+// [26] Revisar (dividí todos los precios en términos del numerario para estacionarizarlo.
+	fi_1t = ((P_1t / P_Ct) / (P_1t(-1) / P_Ct(-1))) * fi_Ct;
+// [27] 
+	fi_2t = ((P_2t / P_Ct) / (P_2t(-1) / P_Ct(-1))) * fi_Ct;
+// [28] 
+	fi_Mt = ((P_Mt / P_Ct) / ((P_Mt(-1)/ P_Ct(-1))) * fi_Ct;
+//*****************
+//El bien doméstico
+//*****************
+// [29]
+	Z_1t = mi_D * (A_D) ^ (omega_D - 1) * (P_1t / P_Dt) ^ (-omega_D) * Y_Dt;
+// [30]
+	Z_2t = (1 - mi_D) * (A_D) ^ (omega_D - 1) * (P_2t / P_Dt) ^ (-omega_D) * Y_Dt;
+// [31] Aquí dividí P1_t y P2_t por P_Ct y multiplico toda la ecuación por P_Ct para estacionarizar todo, cosa que antes creo que no era necesaria, ello porque deben quedar en términos del numerario
+	P_Dt = (A_D) ^(-1) * (mi_D * (P_1t / P_Ct) ^ (1 - omega_D) + (1 - mi_D) * (P_2t / P_Ct) ^ (1 - omega_D)) ^ (1 / (1 - omega_D)) * P_Ct;
+//*************************
+//Condiciones de equilibrio
+//*************************	
+// [75] En esta ecuación también se cancelan los crecimientos que dividen a ambos lados para estacionarizar, solo hay que dejar el P_Mt en términos del numerario
+	Y_Ct = lamda * C_t_NO + (1 - lamda) * C_t_O + E_Ct + tau_CMt * (P_Mt / P_Ct) * M_Ct;
+// [76]
+	Y_It = (1 - lamda) * (I_1t_O + I_2t_O + I_3t_O) + I_gt + tau_IMt * ((P_Mt / P_Ct) / (P_It / P_Ct)) *  M_It;
+// [77] Revisar, en el paper ponen Y_G pero en realidad parece que se refieren a Y_G 
+	Y_Gt = G_t;
+// [78] En esta ecuación también se cancelan los crecimientos que dividen a ambos lados para estacionarizar.
+	YY_1t = X_11t + X_12t + X_13t + Y_1t;
+// [79]  
+	YY_2t = X_21t + X_22t + X_23t + Y_2t;
+// [80] 
+	YY_3t = X_31t + X_32t + X_33t + E_t_oil;
+// [81]
+	Y_Dt = D_ct + D_it;
+// [82]
+	Y_1t = (P_1t / P_Ct) * Z_1t;
+// [83]
+	Y_2t = P_2t / P_Ct) * (Z_2t + Z_Gt);
+// [84] Revisar
+	ghama * (D_pt_as + D_gt_as) * TCR_t = (R_t_W(-1) / fi_t_cas) * (D_pt_as(-1) + D_gt_as(-1)) * TCR_t + (P_Mt / P_Ct) * M_t - (P_Et / P_Ct) *E_t;
 	
-
-
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 
 
 
