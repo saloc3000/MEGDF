@@ -369,12 +369,12 @@ model;
 	TCR_t = (S_t * P_t_cas) / (P_Ct);
 // [30] (Anexo A)
 	fi_Ct = P_Ct / P_Ct(-1);
-// [26] Revisar (dividí todos los precios en términos del numerario para estacionarizarlo.
-	fi_1t = ((P_1t / P_Ct) / (P_1t(-1) / P_Ct(-1))) * fi_Ct;
+// [26] 
+	fi_1t = (P_1t / P_1t(-1)) * fi_Ct;
 // [27] 
-	fi_2t = ((P_2t / P_Ct) / (P_2t(-1) / P_Ct(-1))) * fi_Ct;
+	fi_2t = (P_2t / P_2t(-1)) * fi_Ct;
 // [28] 
-	fi_Mt = ((P_Mt / P_Ct) / ((P_Mt(-1)/ P_Ct(-1))) * fi_Ct;
+	fi_Mt = (P_Mt / (P_Mt(-1)) * fi_Ct;
 //*****************
 //El bien doméstico
 //*****************
@@ -408,18 +408,3 @@ model;
 // [84] Revisar
 	ghama * (D_pt_as + D_gt_as) * TCR_t = (R_t_W(-1) / fi_t_cas) * (D_pt_as(-1) + D_gt_as(-1)) * TCR_t + (P_Mt / P_Ct) * M_t - (P_Et / P_Ct) *E_t;
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-
-
-
