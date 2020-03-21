@@ -374,7 +374,7 @@ model;
 // [27] 
 	fi_2t = (P_2t / P_2t(-1)) * fi_Ct;
 // [28] 
-	fi_Mt = (P_Mt / (P_Mt(-1)) * fi_Ct;
+	fi_Mt = (P_Mt / P_Mt(-1)) * fi_Ct;
 //*****************
 //El bien doméstico
 //*****************
