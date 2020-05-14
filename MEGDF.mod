@@ -119,6 +119,7 @@ var
 	u_1t            ${u_1t}$	        (long_name='costo real de alquiler de capital en el sector 1')	
 	u_2t            ${u_2t}$		(long_name='costo real de alquiler de capital en el sector 2')
 	u_3t            ${u_3t}$	        (long_name='costo real de alquiler de capital en el sector 3')
+// Para V_Gt revisar la pg. 38
 	V_Gt            ${V_Gt}$      		(long_name='Ingreso del gobierno por dividendos del sector petrolero*')
 	V_Pt            ${V_Pt}$	        (long_name='Pago de dividendos del sector privado al gobierno*')
 	W_1t            ${W_1t}$      		(long_name='Salario en sector 1')    
@@ -133,20 +134,20 @@ var
 	X_31t           ${X_31t}$	        (long_name='Insumo del sector 3 usado en la producción del sector 1')  	
 	X_32t           ${X_32t}$	        (long_name='Insumo del sector 3 usado en la producción del sector 2')  	
 	X_33t           ${X_33t}$		(long_name='Insumo del sector 3 usado en la producción del sector 3')
-	XX_1t          ${XX_1t}$		(long_name='compras minoristas del bien YY1_t') 
-	XX_2t          ${XX_2t}$		(long_name='compras minoristas del bien YY2_t') 
-	XX_j1t          ${XX_j1t}$		(long_name='compras del minorista j del bien YY1*')
-	XX_j2t          ${XX_j2t}$		(long_name='compras del minorista j del bien YY2*')
-	Y_Ct            ${Y_Ct}$		(long_name='produccion del bien de consumo')	
-    	Y_Dt            ${Y_Dt}$		(long_name='produccion del bien domestico')
-	Y_Gt            ${Y_Gt}$		(long_name='produduccion del bien de consumo del gobierno')
-	Y_It            ${Y_It}$		(long_name='produccion del bien de inversión')
+	XX_1t          ${XX_1t}$		(long_name='Compras minoristas del bien YY1_t') 
+	XX_2t          ${XX_2t}$		(long_name='Compras minoristas del bien YY2_t') 
+	XX_j1t          ${XX_j1t}$		(long_name='Compras del minorista j del bien YY1*')
+	XX_j2t          ${XX_j2t}$		(long_name='Compras del minorista j del bien YY2*')
+	Y_Ct            ${Y_Ct}$		(long_name='Producción del bien de consumo')	
+    	Y_Dt            ${Y_Dt}$		(long_name='Producción del bien domestico')
+	Y_Gt            ${Y_Gt}$		(long_name='Producción del bien de consumo del gobierno')
+	Y_It            ${Y_It}$		(long_name='Producción del bien de inversión')
 	//Para todas las ecuaciones de Y_it revisar la ecuación [15] del documento, pg. 26 y sus valores de est. estacionario 
-	Y_1t            ${Y_1t}$		(long_name='produccion mayorista del sector 1')
-	Y_2t            ${Y_2t}$		(long_name='produccion mayorista del sector 2')  
-	YY_1t           ${YY_1t}$		(long_name='produccion bruta del sector 1') 
-	YY_2t           ${YY_2t}$		(long_name='produccion bruta del sector 2') 
-	YY_3t           ${YY_3t}$		(long_name='produccion bruta del sector 3')
+	Y_1t            ${Y_1t}$		(long_name='Producción mayorista del sector 1')
+	Y_2t            ${Y_2t}$		(long_name='Producción mayorista del sector 2')  
+	YY_1t           ${YY_1t}$		(long_name='Producción bruta del sector 1') 
+	YY_2t           ${YY_2t}$		(long_name='Producción bruta del sector 2') 
+	YY_3t           ${YY_3t}$		(long_name='Producción bruta del sector 3')
 	YY_j1t          ${YY_j1t}$		(long_name='Producción minorista de la variedad j en sector 1*')
 	YY_j2t	        ${YY_j2t}$		(long_name='Producción minorista de la variedad j en sector 2*')	
 	Z_1t            ${Z_1t}$		(long_name='Monto de Y1,t como insumo en producción del bien doméstico')	
@@ -315,7 +316,8 @@ parameters
 	zita = 0.4340;
 	sigma_1 = 0.0200;
 	sigma_2 = 0.4710;
-	fi_1 = 6.0000;
+// Cambio el valor del fi: fuente confiable que asegura que es 0
+	fi_1 = 0.0000;
 	fi_2 = 0.1200;
 	R = 1.0940;
 	ji_1_1 = 0.2511;
@@ -363,11 +365,11 @@ model;
 	P_1t = (((fi_1 - 1) / fi_1) + (xi_1 / fi_1) * ((fi_1t / fi_C) - 1) * (fi_1t / fi_C) - beta * (xi_1 / fi_1) * (omega_t(+1) / omega_t) * ((fi_1t(+1) / fi_C) - 1) * (fi_1t(+1) / fi_C) * (fi_1t(+1) / fi_C(+1)) * ((Y_1t(+1) / ghama_pibt(+1)) / (Y_1t / ghama_pibt))) ^ (-1) * P_1t_P;               
 // [24]
 	P_2t = (((fi_1 - 1) / fi_1) + (xi_2 / fi_1) * ((fi_2t / fi_C) - 1) * (fi_2t / fi_C) - beta * (xi_2 / fi_1) * (omega_t(+1) / omega_t) * ((fi_2t(+1) / fi_C) - 1) * (fi_2t(+1) / fi_C) * (fi_2t(+1) / fi_C(+1)) * ((Y_2t(+1) / ghama_pibt(+1)) / (Y_2t / ghama_pibt))) ^ (-1) * P_2t_P; 
-// [25] Aquí se utiliza el TCR (Anexo B) en lugar del tipo de cambio nominal (St) del Anexo A, por lo que más adelante tocará definir la ecuación para el tipo de cambio real
-	P_Mt = (((fi_1 - 1) / fi_1) + (xi_M / fi_1) * ((fi_Mt / fi_C) - 1) * (fi_Mt / fi_C) - beta * (xi_M / fi_1) * (omega_t(+1) / omega_t) * ((fi_Mt(+1) / fi_C) - 1) * (fi_Mt(+1) / fi_C) * (fi_Mt(+1) / fi_C(+1)) * (M_t(+1) / M_t)) ^ (-1) * TCR_t * P_t_mas;
+// [25] Aquí se utiliza el TCR (Anexo B) en lugar del tipo de cambio nominal (St) del Anexo A, por lo que más adelante tocará definir la ecuación para el tipo de cambio real, al final se multiplica y divide como corresponda por los Pc y Pcm.
+	P_Mt = (((fi_1 - 1) / fi_1) + (xi_M / fi_1) * ((fi_Mt / fi_C) - 1) * (fi_Mt / fi_C) - beta * (xi_M / fi_1) * (omega_t(+1) / omega_t) * ((fi_Mt(+1) / fi_C) - 1) * (fi_Mt(+1) / fi_C) * (fi_Mt(+1) / fi_C(+1)) * (M_t(+1) / M_t)) ^ (-1) * TCR_t * (P_t_mas/P_t_cas)*P_Ct;
 // [89] Esta es una ecuación del Anexo A que se debe definir en este apartado, ya está estacionarizado, revisar además la ecuación [14] del documento pg. 25, la ecuación de R de la pg. 36 y la ec. [71] del documento	
 	TCR_t = S_t;
-// [30] (Anexo A)
+// [30 (ANEXO A)] ESTA ECUACIÓN NO ESTÁ DADA DE FORMA EXPLÍCITA EN ANEXOS B Y C
 	fi_Ct = P_Ct / P_Ct(-1);
 // [26] 
 	fi_1t = (P_1t / P_1t(-1)) * fi_Ct;
@@ -382,16 +384,16 @@ model;
 	Z_1t = mi_D * (A_D) ^ (omega_D - 1) * (P_1t / P_Dt) ^ (-omega_D) * Y_Dt;
 // [30]
 	Z_2t = (1 - mi_D) * (A_D) ^ (omega_D - 1) * (P_2t / P_Dt) ^ (-omega_D) * Y_Dt;
-// [31] Aquí dividí P1_t y P2_t por P_Ct y multiplico toda la ecuación por P_Ct para estacionarizar todo, cosa que antes creo que no era necesaria, ello porque deben quedar en términos del numerario
-	P_Dt = (A_D) ^(-1) * (mi_D * (P_1t / P_Ct) ^ (1 - omega_D) + (1 - mi_D) * (P_2t / P_Ct) ^ (1 - omega_D)) ^ (1 / (1 - omega_D)) * P_Ct;
+// [31] Una vez definidas las ecuaciones de P_1 y P_2 estacionarizadas atrás, no es necesario hacerlo aquí.
+	P_Dt = (A_D) ^(-1) * (mi_D * (P_1t) ^ (1 - omega_D) + (1 - mi_D) * (P_2t) ^ (1 - omega_D)) ^ (1 / (1 - omega_D));
 //*************************
 //Condiciones de equilibrio
 //*************************	
 // [75] En esta ecuación también se cancelan los crecimientos que dividen a ambos lados para estacionarizar, solo hay que dejar el P_Mt en términos del numerario
-	Y_Ct = lamda * C_t_NO + (1 - lamda) * C_t_O + E_Ct + tau_CMt * (P_Mt / P_Ct) * M_Ct;
+	Y_Ct = lamda * C_t_NO + (1 - lamda) * C_t_O + E_Ct + tau_CMt * (P_Mt) * M_Ct;
 // [76]
-	Y_It = (1 - lamda) * (I_1t_O + I_2t_O + I_3t_O) + I_gt + tau_IMt * ((P_Mt / P_Ct) / (P_It / P_Ct)) *  M_It;
-// [77] Revisar, en el paper ponen Y_G pero en realidad parece que se refieren a Y_G 
+	Y_It = (1 - lamda) * (I_1t_O + I_2t_O + I_3t_O) + I_gt + tau_IMt * (P_Mt/ P_It) * M_It;
+// [77] Revisar, en el paper ponen Y_G pero en realidad parece que se refieren a Y_Gt 
 	Y_Gt = G_t;
 // [78] En esta ecuación también se cancelan los crecimientos que dividen a ambos lados para estacionarizar.
 	YY_1t = X_11t + X_12t + X_13t + Y_1t;
@@ -402,9 +404,220 @@ model;
 // [81]
 	Y_Dt = D_ct + D_it;
 // [82]
-	Y_1t = (P_1t / P_Ct) * Z_1t;
+	Y_1t = (P_1t) * Z_1t;
 // [83]
-	Y_2t = P_2t / P_Ct) * (Z_2t + Z_Gt);
+	Y_2t = P_2t * (Z_2t + Z_Gt);
 // [84] Revisar
-	ghama * (D_pt_as + D_gt_as) * TCR_t = (R_t_W(-1) / fi_t_cas) * (D_pt_as(-1) + D_gt_as(-1)) * TCR_t + (P_Mt / P_Ct) * M_t - (P_Et / P_Ct) *E_t;
+	ghama * (D_pt_as + D_gt_as) * TCR_t = (R_t_W(-1) / fi_t_cas) * (D_pt_as(-1) + D_gt_as(-1)) * TCR_t + (P_Mt) * M_t - (P_Et) *E_t;
+
+
+//********************** *************************
+//Valores iniciales de las variables
+//********************** *************************  
+	initval;
+	tau_1t_X = 0.048;
+	tau_2t_X = 0.083;
+	tau_3t_X = 0.116;
+	tau_1t_MX = 0.066;
+	tau_2t_MX = 0.198;
+	tau_3t_MX = 0;
+	tau_CMt = 0.461;
+	tau_IMt = 0.053;
+	tau_It = 0.031;
+	tau_Kt = 0.125;
+	tau_Nt = 0.048;
+	tau_Ct = 0.11;
+	v_t = 0.113;
+	fi_Ct = 1.03;
+// [A25]
+	fi_1t = fi_Ct;
+// [A26]
+	fi_2t = fi_Ct;
+// [A27]
+	fi_Mt = fi_Ct;
+	fi_1t = 1.03;
+	fi_2t = 1.03;
+	fi_3t = 1.03;
+	R_t = 1.094;
+	R_t_exo = 1.0052;
+	fi_C_as = 1.0167;
+	R_t_W = 1.080;
+	D_pt_as = 8.8;
+	D_gt_as = 10.9;
+	B_gt = 24.0;
+	g_Ft = 0.69;
+	K_1t = 50.3;
+	K_2t = 161.0;
+	K_3t = 14.8;
+	I_1t = 4.6;
+	I_2t = 10.7;
+	I_3t = 4.0;
+	n_1t = 11.95;
+	n_2t = 43.06;
+	n_3t = 0.45;
+// Ecuaciones obtenidas de la pg. 53
+	n_1t = h_1t;
+	n_2t = h_2t;
+	n_3t = h_3t;
+	h_1t_NO = h_1t;
+	h_1t = h_1t_O;
+	h_2t_NO = h_2t;
+	h_2t = h_2t_O;
+	h_3t_NO = h_3t;
+	h_3t = h_3t_O;
+// Los autores habían dejado la PTF en 1 pero tras el primer experimento deciden que es mejor que inicie en 0
+	A_t = 0;
+	A_t_1 = 1;
+	A_t_2 = 1;
+	A_t_3 = 1;
+	AA_t_1 = 0;
+	AA_t_2 = 0;
+	AA_t_3 = 0;
+// ECUACIONES AÑADIDAS (NO ESTÁ EXPLÍCITA EN LOS APÉNDICES, VER PG. 23) (NO SÉ SI SE DEBAN PONER AQUÍ, PERO ME SONÓ).
+	AA_t_1 = A_t_1 * A_t;
+	AA_t_2 = A_t_2 * A_t;
+	AA_t_3 = A_t_3 * A_t;
+// ECUACIÓN AÑADIDA (NO ESTÁ EXPLÍCITA EN LOS APÉNDICES, VER PG. 44) (NO SÉ SI SE DEBAN PONER AQUÍ, PERO ME SONÓ).
+	gamma_Lt = l_t(+1) / l_t;
+	P_t_oilas = TCR_t;
+	TCR_t = 1.00;
+	P_t_mas = 0.8333;
+// Sobre este P_Ct no es explícito en el paper, tal vez no haya necesidad de ponerlo
+	P_Ct = 1;
+	Yas_t = 1;
+	II_gt = 1;
+	II_mt = 1;
+// Tomado de la pg. 44
+	g_t_exo = 0.128;
+	T_Gt = 0;
+	T_Pt = 0;
+	T_t_NO = 0;
+	T_t_O = 0;
+// Revisar valor del índice de actividad externo (PIB externo)
+	BC_t = -1.16;
+	B_gt = 24.03;
+	C_t_NO = 53.77;
+	C_t_O = 77.73;
+	D_ct = 71.37;
+	D_it = 17.34;
+	D_gt_as = 10.88;
+	D_pt_as = 8.80;
+	E_t = 16.71;
+	E_Ct = 11.54;
+	E_t_oil = 5.17;
+	F_t = 35.62;
+	ghama_pibt = 1.02;
+	G_t = 12.80;
+	g_Ct = 0.128;
+// No sé si hay que repetir las de h pero igual lo planteé de esta manera
+	h_1t = 11.95;
+	h_2t = 43.06;
+	h_3t = 0.45;
+	h_1t_NO = 11.95;
+	h_2t_NO = 43.06;
+	h_3t_NO = 0.45;
+	I_gt = 2.08;
+	I_1t_O = 13.16;
+	I_2t_O = 30.52;
+	I_3t_O = 11.29;
+	K_gt = 37.75;
+	K_1t_O = 143.61;
+	K_2t_O = 459.95;
+	K_3t_O = 42.24;
+	l_t = 0.52;
+	M_t = 17.87;
+	M_1t = 6.10;
+	M_2t = 5.46;
+	M_3t = 0;
+	M_Ct = 2.33;
+	M_It = 3.98;
+	PIB_Rt = 100.00;
+	P_1t = 1.20;
+	P_2t = 1.20;
+	P_Dt = 1.00;
+	P_Et = 1.00;
+	P_Gt = 1.00;
+	P_It = 1.00;
+	P_Mt = 1.00;
+	P_PIBt = 1.00;
+	P_1t_P = 1.00;
+	P_2t_P = 1.00;
+	P_3t_P = 1.00;
+	TI_t = 1.00;
+	u_1t = 0.158;
+	u_2t = 0.128;
+	u_3t = 0.365;
+	W_1t = 1.00;
+	W_2t = 1.00;
+	W_3t = 1.00;
+	X_11t = 12.90;
+	X_12t = 8.79;
+	X_13t = 0;  
+	X_21t = 9.67;
+	X_22t = 27.71;
+	X_23t = 0.48;  
+	X_31t = 1.28;
+	X_32t = 0;
+	X_33t = 0.58;
+	Y_Ct = 74.77;
+	Y_Dt = 88.71;
+	Y_Gt = 12.81;
+	Y_It = 21.53;
+	Y_1t = 29.67;
+	Y_2t = 71.84;
+	YY_1t = 51.37;
+	YY_2t = 109.71;
+	YY_3t = 7.03;	
+	Z_1t = 24.73;	
+	Z_2t = 49.20;
+	Z_Gt = 10.67;
+	omega_t = 0.021;
+// [A13]
+	X_21t = ji_2_1 * YY_1t;
+// [A14]
+	X_22t = ji_2_2 * YY_2t;
+// [A15]
+	X_23t = ji_2_3 * YY_3t;
+// [A22] 
+	P_1t = (fi_1/(fi_1-1));
+// [A23] 
+	P_2t = (fi_1/(fi_1-1));
+// [A24] Revisar 
+	P_Mt = (fi_1/(fi_1-1));
+// [A28]
+	Z_1t = mi_D * (A_D) ^ (omega_D - 1) * Y_Dt;
+// [A29]
+	Z_2t = (1 - mi_D) * (A_D) ^ (omega_D - 1) * Y_Dt;
+// [A30]
+	1 = (A_D) ^(-1) * (mi_D * (P_1t) ^ (1 - omega_D) + (1 - mi_D) * (P_2t) ^ (1 - omega_D)) ^ (1 / (1 - omega_D));
+// [A69] 
+	Y_Ct = lamda * C_t_NO + (1 - lamda) * C_t_O + E_Ct + tau_CMt * M_Ct;
+// [A70]
+	Y_It = (1 - lamda) * (I_1t_O + I_2t_O + I_3t_O) + I_gt + tau_IMt * M_It;
+// [A71]
+	Y_Gt = G_t;
+// [A72]
+	YY_1t = X_11t + X_12t + X_13t + Y_1t;
+// [A73]  
+	YY_2t = X_21t + X_22t + X_23t + Y_2t;
+// [A74] 
+	YY_3t = X_31t + X_32t + X_33t + E_t_oil;
+	
+//********************** *************************
+//Valores iniciales de algunas variables
+//********************** *************************  
+	endval;
+// Estas variables toman valor de 0 después de 2027.
+	II_gt = 0;
+	II_mt = 0;
+// Tomado de la pg. 60
+	g_t_exo = 0.16;
+
+	
+	
+	
+	
+	
+	
+
 	
