@@ -358,6 +358,14 @@ model;
 	X_22t = ji_2_2 * YY_2t;
 // [15]
 	X_23t = ji_2_3 * YY_3t;
+//***************************************
+// [19-20-21]
+	M_1t=ji_M_1*YY_1t;
+	M_2t=ji_M_2*YY_2t;
+	M_3t=ji_M_3*YY_3t;
+//*************************************
+//  [22]
+	P_3t_P=P_t_oilas*TCR_t;
 //*************************************
 //Mayoristas, minoristas e importadores
 //*************************************
@@ -386,7 +394,39 @@ model;
 	Z_2t = (1 - mi_D) * (A_D) ^ (omega_D - 1) * (P_2t / P_Dt) ^ (-omega_D) * Y_Dt;
 // [31] Una vez definidas las ecuaciones de P_1 y P_2 estacionarizadas atrás, no es necesario hacerlo aquí.
 	P_Dt = (A_D) ^(-1) * (mi_D * (P_1t) ^ (1 - omega_D) + (1 - mi_D) * (P_2t) ^ (1 - omega_D)) ^ (1 / (1 - omega_D));
-//*************************
+//******************************************************************************
+//[38]
+	Y_Gt=A_G*Z_Gt;
+//[39]
+	P_Gt=P_2t/A_G;
+//[40]
+	c_t_NO=(1-((R_t/fi_Ct)-gamma_Lt)*l_t)+(W_1t*h_1t_NO+W_2t*h_2t_NO+W_3t*h_3t_NO)+T_t_NO; 
+//[41]
+	l_t(+1)=l_t*(gamma_Lt/gamma)*(W_1t*h_1t_NO+W_2t*h_2t_NO+W_3t*h_3t_NO/(W_1t(+1)*h_1t_NO(+1)+W_2t(+1)*h_2t_NO(+1)+W_3t(+1)*h_3t_NO(+1)));
+//[42-43-44]  
+	psi_1_NO*(h_1t_NO)^epsilon=(1-lt*((R_t/fi_Ct)-gamma_Lt))*W_1t);
+	psi_2_NO*(h_2t_NO)^epsilon=(1-lt*((R_t/fi_Ct)-gamma_Lt))*W_2t);
+	psi_3_NO*(h_3t_NO)^epsilon=(1-lt*((R_t/fi_Ct)-gamma_Lt))*W_3t);
+//[57]
+	P_It* I_gt=g_It*PIB_Rt*P_PIBt;
+//[58]
+	gamma*K_gt=(1-delta_g)*K_gt(-1)+I_gt-(ita_g/2)*((I_gt/K_gt(-1))-gamma+(1-delta_g))^2*K_gt(-1);
+//[59]
+	P_gt*g_t=g_Ct*PIB_Rt*P_PIBt;
+//[60]
+	gamma*B_gt=g_Ft*F_t;
+//[61]
+	gamma*D_gt_as*TCR_t=(1-g_Ft)F_t;
+//[62]*
+	F_T=P_gt*g_t_exo+P_It*I_gt+(R_t_W(-1)/fi_t_cas)*D_gt_as(-1)*TCR_t+(R_t(-1)/fi_Ct)*B_gt(-1)+T_Gt-tau_Ct*(1-lambda)*C_t_O-tau_It*P_I_t*(1-lambda)*(I_1t_O+I_2t_O+I_3t_O)-tau_Nt*(1-lambda)*(W_1t*h_1t_N+W_2t*h_2t_N+W_3t*h_3t_N)-tau_Kt*(1-lambda)*(u_1t*K_1t_O(-1)+u_2t*K_2t_O(-1)+u_3t*K_3t_O(-1))-P_Mt*(tau_1t_MX*M_1t+tau_2t_MX*M_2t+tau_3t_MX*M_3t+tau_CMt_*M_Ct +tau_IMt*M_It)-((tau_1t_X+tau_2t_X+tau_3t_X)*(PP_jt*X_11t+PP_jt*X_12t+PP_jt*X_13+PP_jt*X_21t+PP_jt*X_22t+PP_jt*X_23t+PP_jt*X_31t+PP_jt*X_32t*PP_jt*X_33t))-v_t*u_3t*(1-lambda)*K_3t_O(-1); 
+//[69]
+	R_T_W=R_T_as*A_P*exp*(rho*(((TCR_t*(D_Pt_as(-1)+D_Gt_as(-1))/(PIB_Rt*P_PIBt))-dep)));
+//************************************************************************************
+//[70]
+	g_Ct=II_gt*g_Ct_exo+(1-II_gt)*g_Ct(-1)*(((TCR_t*D_Gt_as(-1)+B_Gt(-1))/(PIB_t_R*P_PIBt))/(dpp))^(-sigma);
+//[71]
+	R_t=II_Mt*R_t_exo+(1-II_mt)*((1-zita)*R_t*(fi_C_t/fi_C)^(iota)+zita*R_t(-1));
+//**********************************************************************************
 //Condiciones de equilibrio
 //*************************	
 // [75] En esta ecuación también se cancelan los crecimientos que dividen a ambos lados para estacionarizar, solo hay que dejar el P_Mt en términos del numerario
@@ -568,6 +608,10 @@ model;
 	X_22t = ji_2_2 * YY_2t;
 // [A15]
 	X_23t = ji_2_3 * YY_3t;
+//[A19-A20-A21]
+	M_1t=ji_M_1*YY_1t;
+	M_2t=ji_M_2*YY_2t;
+	M_3t=ji_M_3*YY_3t;
 // [A22] 
 	P_1t = (fi_1/(fi_1-1));
 // [A23] 
@@ -589,6 +633,37 @@ model;
 	Z_2t = (1 - mi_D) * (A_D) ^ (omega_D - 1) * Y_Dt;
 // [A30]
 	1 = (A_D) ^(-1) * (mi_D * (P_1t) ^ (1 - omega_D) + (1 - mi_D) * (P_2t) ^ (1 - omega_D)) ^ (1 / (1 - omega_D));
+// [A37] 
+	Y_Gt=A_G*Z_Gt;
+//[A38] 
+	P_Gt=P_2t/A_G;
+//[A39] 
+	C_t_NO=(1-(R_t/fi_Ct-gamma_L)*l)*((W_1t*h_1t_NO+W_2t*h_2t_NO+W_3t*h_3t_NO))+t_NO;
+
+//[A40]
+	gamma_L=gamma;
+//[A41]
+	psi_1_NO*(h_1t_NO)^epsilon=(1-(R_t/fi_Ct-gamma_L)*l)*W_1t;
+//[A42]
+	psi_2_NO*(h_2t_NO)^epsilon=(1-(R_t/fi_Ct-gamma_L)*l)*W_2t;
+//[A43]
+	psi_3_NO*(h_3t_NO)^epsilon=(1-(R_t/fi_Ct-gamma_L)*l)*W_3t;
+//[A56]
+	I_Gt=g_I*PIB_Rt;
+//[A57]
+	I_Gt/K_gt=gamma-(1-sigma_G);
+//[A58]
+	g=g_c*PIB_Rt;
+//[A59]
+	gamma*b_g=g_F*F_t
+//[A60]
+	gamma*D_g_as=(1-g_F)*F_t
+//[A61]
+	F_t=g_t+I_Gt+(R_Wt/fi_Ct_as)*D_G_as+(R_t/fi_Ct)*b_G+t_G-tau_Ct*(1-lambda)*(I_1t_O+I_2t_O+I_3t_O)-tau_Nt*(1-lambda)*(W_1t*h_1_O+W_2t*h_2_O+W_3t*h_3_O)-(tau_1t_MX*M_1t+tau_2t_MX*M_2t+tau_3t_MX*M_3t+tau_Ct_M*M_Ct+tau_It_M*M_I)((tau_1t_X+tau_2t_X+tau_3t_X)*(PP_jt*X_11t+PP_jt*X_12t+PP_jt*X_13+PP_jt*X_21t+PP_jt*X_22t+PP_jt*X_23t+PP_jt*X_31t+PP_jt*X_32t*PP_jt*X_33t))-(tau_Kt*(1-lambda)*(u_1*k_1t_O+u_2*k_2t_O+u_3*k_3t_O)-v_t*u_3t*(1-lambda)*K_3t_O;
+//[A66]
+
+	R_t_w=R_t_as*A_rho;	
+
 // [A69] 
 	Y_Ct = lamda * C_t_NO + (1 - lamda) * C_t_O + E_Ct + tau_CMt * M_Ct;
 // [A70]
@@ -601,6 +676,14 @@ model;
 	YY_2t = X_21t + X_22t + X_23t + Y_2t;
 // [A74] 
 	YY_3t = X_31t + X_32t + X_33t + E_t_oil;
+//[A75]
+	Y_Dt=D_ct+D_it;
+//[A76]
+	Y_1t=P_1t*Z_1t;
+//[A77]
+	Y_2t=P_2t*(Z_2t+Z_Gt);
+//[A78]
+	(gamma-(R_Wt/fi_C_as)*(D_pt_as+D_gt_as)=M_t-E_t;
 //No olvidar poner el choque a la productividad, experimento 1.
 	P_1t = 1.20;
 	P_2t = 1.20;
