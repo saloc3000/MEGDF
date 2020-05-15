@@ -428,16 +428,6 @@ model;
 	tau_Nt = 0.048;
 	tau_Ct = 0.11;
 	v_t = 0.113;
-	fi_Ct = 1.03;
-// [A25]
-	fi_1t = fi_Ct;
-// [A26]
-	fi_2t = fi_Ct;
-// [A27]
-	fi_Mt = fi_Ct;
-	fi_1t = 1.03;
-	fi_2t = 1.03;
-	fi_3t = 1.03;
 	R_t = 1.094;
 	R_t_exo = 1.0052;
 	fi_C_as = 1.0167;
@@ -531,18 +521,6 @@ model;
 	M_3t = 0;
 	M_Ct = 2.33;
 	M_It = 3.98;
-	PIB_Rt = 100.00;
-	P_1t = 1.20;
-	P_2t = 1.20;
-	P_Dt = 1.00;
-	P_Et = 1.00;
-	P_Gt = 1.00;
-	P_It = 1.00;
-	P_Mt = 1.00;
-	P_PIBt = 1.00;
-	P_1t_P = 1.00;
-	P_2t_P = 1.00;
-	P_3t_P = 1.00;
 	TI_t = 1.00;
 	u_1t = 0.158;
 	u_2t = 0.128;
@@ -572,6 +550,18 @@ model;
 	Z_2t = 49.20;
 	Z_Gt = 10.67;
 	omega_t = 0.021;
+
+	
+//********************** *************************
+//Valores finales de algunas variables 
+//********************** *************************  
+	endval;
+// Estas variables toman valor de 0 después de 2027.
+	II_gt = 0;
+	II_mt = 0;
+// Tomado de la pg. 60
+	g_t_exo = 0.16;
+	fi_Ct = 1.03;
 // [A13]
 	X_21t = ji_2_1 * YY_1t;
 // [A14]
@@ -584,6 +574,15 @@ model;
 	P_2t = (fi_1/(fi_1-1));
 // [A24] Revisar 
 	P_Mt = (fi_1/(fi_1-1));
+// [A25]
+	fi_1t = fi_Ct;
+// [A26]
+	fi_2t = fi_Ct;
+// [A27]
+	fi_Mt = fi_Ct;
+	fi_1t = 1.03;
+	fi_2t = 1.03;
+	fi_3t = 1.03;
 // [A28]
 	Z_1t = mi_D * (A_D) ^ (omega_D - 1) * Y_Dt;
 // [A29]
@@ -602,19 +601,19 @@ model;
 	YY_2t = X_21t + X_22t + X_23t + Y_2t;
 // [A74] 
 	YY_3t = X_31t + X_32t + X_33t + E_t_oil;
-	
-//********************** *************************
-//Valores iniciales de algunas variables
-//********************** *************************  
-	endval;
-// Estas variables toman valor de 0 después de 2027.
-	II_gt = 0;
-	II_mt = 0;
-// Tomado de la pg. 60
-	g_t_exo = 0.16;
-
-	
-	
+//No olvidar poner el choque a la productividad, experimento 1.
+	P_1t = 1.20;
+	P_2t = 1.20;
+	P_Dt = 1.00;
+	P_Et = 1.00;
+	P_Gt = 1.00;
+	P_It = 1.00;
+	P_Mt = 1.00;
+	P_PIBt = 1.00;
+	P_1t_P = 1.00;
+	P_2t_P = 1.00;
+	P_3t_P = 1.00;
+	PIB_Rt = 100.00;
 	
 	
 	
