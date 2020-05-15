@@ -317,7 +317,7 @@ parameters
 	sigma_1 = 0.0200;
 	sigma_2 = 0.4710;
 // Cambio el valor del fi: fuente confiable que asegura que es 0
-	fi_1 = 0.0000;
+	fi_1 = 6;
 	fi_2 = 0.1200;
 	R = 1.0940;
 	ji_1_1 = 0.2511;
